@@ -8,17 +8,9 @@
 /usr/bin/debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password asd123'
 /usr/bin/apt-get install -y mysql-server
 /usr/bin/apt-get install -y php5-mysql
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/dbconfig-install boolean true'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/app-password-confirm password asd123'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/password-confirm password asd123'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password asd123'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/setup-password password asd123'
-/usr/bin/debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/app-pass password asd123'
-/usr/bin/apt-get install -y phpmyadmin
 
-/usr/bin/wget https://dl.dropboxusercontent.com/u/27487366/debs/ubuntu12.04/php5.2.17/php_5.2.17-1_amd64.deb
-/usr/bin/wget https://dl.dropboxusercontent.com/u/27487366/debs/ubuntu12.04/php5.2.17/php.ini-recommended
+/usr/bin/wget https://github.com/nebijokit/vagrant-php5.2/raw/master/php_5.2.17-1_amd64.deb
+/usr/bin/wget https://raw.githubusercontent.com/nebijokit/vagrant-php5.2/master/php.ini-recommended
 /usr/bin/dpkg -i /home/vagrant/php_5.2.17-1_amd64.deb
 /usr/bin/apt-get install -f -y
 
@@ -60,12 +52,10 @@
 /bin/echo "Action application/x-httpd-php5 /php52-cgi" >> /etc/apache2/php52.conf
 /bin/echo "AddHandler application/x-httpd-php5 .php" >> /etc/apache2/php52.conf
 
-/usr/bin/touch /home/vagrant/activate-php52
+/usr/bin/touch /home/vagrant/activate-php52.info
 
 adduser www-data vagrant
 adduser vagrant www-data
-/bin/rm -rf /var/www
-/bin/ln -fs /vagrant /var/www
 
 /bin/rm -rf /home/vagrant/php.ini-recommended
 /bin/rm -rf /home/vagrant/php_5.2.17-1_amd64.deb
@@ -78,4 +68,3 @@ adduser vagrant www-data
 /bin/echo "To activate php 5.2 add 'Include php52.conf' to <VirtualHost> definition for the sites which should use this version and restart apache" >> /home/vagrant/activate-php52.info
 /bin/echo "!!!!!!!!!!!!!!!!!!!!!!!!!!"
 /bin/echo "!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
